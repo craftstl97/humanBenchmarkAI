@@ -8,6 +8,7 @@ import pyautogui
 
 # Import activity functions here
 import reflexTest
+import sequenceTest
 
 activities = ['Reaction Time', 'Sequence Memory', 'Aim Trainer', 
               'Number Memory', 'Verbal Memory', 'Chimp Test',
@@ -110,3 +111,7 @@ if __name__ == "__main__":
     if activity.lower() == 'reaction time':
         print("Automating Reaction Time test")
         reflexTest.start()
+
+    if activity.lower() == 'sequence memory':
+        print("Automating Sequence Memory test")
+        sequenceTest.start()
