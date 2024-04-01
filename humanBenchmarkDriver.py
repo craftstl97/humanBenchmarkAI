@@ -121,7 +121,8 @@ if __name__ == "__main__":
 
     if activity.lower() == 'number memory':
         print("Automating Number Memory Test")
-        numberTest.start()
+        tesseract = input("Enter path to tesseract-OCR")
+        numberTest.start(tesseract)
 
     # Verbal Memory
         
