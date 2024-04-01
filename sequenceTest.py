@@ -27,7 +27,7 @@ def start():
     
     time.sleep(0.25)
     n = 1
-    while ImageGrab.grab(bbox = (840,450,841,451)).getpixel((0,0))[2] >= 100:
+    while n < 60:
         # Test is still going
         print('Round', n)
         sequence = []
@@ -57,7 +57,7 @@ def start():
         n += 1
 
     print("Testing Complete")
-    
+    print("Final Score:", n)    
 
 
 def get_active_square():
@@ -87,27 +87,6 @@ def get_active_square():
     if image.getpixel((100,0))[2] >= 240:
         return 8
     if image.getpixel((200,0))[2] >= 240:
-        return 9
-    return get_active_square()
-    
-
-    if ImageGrab.grab(bbox = (840,450,841,451)).getpixel((0,0))[2] >= 240:
-        return 1 
-    if ImageGrab.grab(bbox = (940,450,941,451)).getpixel((0,0))[2] >= 240:
-        return 2
-    if ImageGrab.grab(bbox = (1040,450,1041,451)).getpixel((0,0))[2] >= 240:
-        return 3
-    if ImageGrab.grab(bbox = (840,350,841,351)).getpixel((0,0))[2] >= 240:
-        return 4
-    if ImageGrab.grab(bbox = (940,350,941,351)).getpixel((0,0))[2] >= 240:
-        return 5
-    if ImageGrab.grab(bbox = (1040,350,1041,351)).getpixel((0,0))[2] >= 240:
-        return 6
-    if ImageGrab.grab(bbox = (840,250,841,251)).getpixel((0,0))[2] >= 240:
-        return 7
-    if ImageGrab.grab(bbox = (940,250,941,251)).getpixel((0,0))[2] >= 240:
-        return 8
-    if ImageGrab.grab(bbox = (1040,250,1041,251)).getpixel((0,0))[2] >= 240:
         return 9
     return get_active_square()
 
