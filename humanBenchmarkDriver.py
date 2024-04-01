@@ -9,6 +9,7 @@ import pyautogui
 # Import activity functions here
 import reflexTest
 import sequenceTest
+import numberTest
 
 activities = ['Reaction Time', 'Sequence Memory', 'Aim Trainer', 
               'Number Memory', 'Verbal Memory', 'Chimp Test',
@@ -109,9 +110,23 @@ if __name__ == "__main__":
     time.sleep(1)
     
     if activity.lower() == 'reaction time':
-        print("Automating Reaction Time test")
+        print("Automating Reaction Time Test")
         reflexTest.start()
 
     if activity.lower() == 'sequence memory':
-        print("Automating Sequence Memory test")
+        print("Automating Sequence Memory Test")
         sequenceTest.start()
+
+    # Aim trainer
+
+    if activity.lower() == 'number memory':
+        print("Automating Number Memory Test")
+        numberTest.start()
+
+    # Verbal Memory
+        
+    # Chimp Test
+        
+    # Visual Memory
+        
+    # Typing Speed
