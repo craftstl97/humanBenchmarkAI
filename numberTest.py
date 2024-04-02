@@ -89,7 +89,8 @@ def get_number():
     Takes a screenshot and returns the number displayed as a string
     '''
 
-    image = ImageGrab.grab(bbox = (100,300,1621,751))
-    #image.show() # uncomment for testing purposes
+    image = ImageGrab.grab(bbox = (50,380,1621,621))
+    image = image.convert('L') # Convert to grayscale for better accuracy
+    # image.show() # uncomment for testing purposes
     # convert to string, config to only look for digits
-    return pytesseract.image_to_string(image, config='--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789')
+    return pytesseract.image_to_string(image, config='--psm 7 -c tessedit_char_whitelist=0123456789')
