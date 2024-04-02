@@ -50,7 +50,7 @@ def start(tesseractPath = tpath):
     for n in range(60):
         time.sleep(1)
         # 1) process image to text
-        number = get_number()    
+        number = get_number(n)    
         print("Text Detected:\n",number)
         # 2) wait
         wait_for_prompt()
@@ -81,16 +81,19 @@ def wait_for_prompt():
     if "What was the number?" not in text:
         wait_for_prompt()
     
-def get_number():
+def get_number(n):
     ''' 
-    Inputs: None
+    Inputs: Level -> int
     Outputs: Text to type -> String
     
     Takes a screenshot and returns the number displayed as a string
     '''
-
-    image = ImageGrab.grab(bbox = (50,380,1621,621))
-    image = image.convert('L') # Convert to grayscale for better accuracy
+    off = n*50
+    if off > 750:
+        off = 750
+    image = ImageGrab.grab(bbox = (800-off,360,1040+off,601))
+    image = image.convert('L') # Convert to grayscale
+    image = image.point(lambda p: p > 200 and 255) # convert grayscale to binary for maximum accuracy
     # image.show() # uncomment for testing purposes
     # convert to string, config to only look for digits
     return pytesseract.image_to_string(image, config='--psm 7 -c tessedit_char_whitelist=0123456789')
