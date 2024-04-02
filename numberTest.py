@@ -3,7 +3,7 @@ import pyautogui
 from PIL import Image, ImageGrab
 import pytesseract
 
-tpath = "C:/Users/637817/AppData/Local/Programs/Tesseract-OCR"
+tpath = "C:/Users/637817/AppData/Local/Programs/Tesseract-OCR/tesseract.exe"
 
 def start(tesseractPath = tpath):
     '''
@@ -24,20 +24,72 @@ def start(tesseractPath = tpath):
     '''
     # Set up tesseract
     pytesseract.pytesseract.tesseract_cmd = tesseractPath
-
     
     # Start the test
+    pyautogui.click(x=680, y=700)
+    time.sleep(5)
 
+    # Zooming In - The engine struggles to identify certain characters when zoomed out
+    pyautogui.click(x=840, y=500)
+    print("Zooming in")
+    pyautogui.keyDown('ctrl')
+    for x in range(4):
+        pyautogui.press('+')
+    pyautogui.keyUp('ctrl')
 
-def get_num(x1,y1,x2,y2):
-    ''' 
-    Inputs: four numbers indicating the corners of the bounding box
-    Outputs: number -> String
-    
-    Takes a screenshot and returns the number displayed as a string
-    The bounding box will naturally grow as the number gets larger, to give tesseract
-    the best chance at getting the right answer, we won't give it more than it needs
+    # click start
+    print('Clicking Start')
+    pyautogui.click(x=960, y=720)
+
+    # Main loop: 
+    # 1) get number
+    # 2) wait for field to appear
+    # 3) type the number in the box
+    # 4) Hit Enter 
+    # 5) Click next
+    for n in range(60):
+        time.sleep(1)
+        # 1) process image to text
+        number = get_number()    
+        print("Text Detected:\n",number)
+        # 2) wait
+        wait_for_prompt()
+        # 3) type the number using pyautogui.write()
+        print('\n Typing number')
+        pyautogui.write(number, interval=0.05)
+        print('Done')
+        time.sleep(0.2)
+        # 4) Hit Enter
+        pyautogui.press('enter')
+        time.sleep(1)
+        # 5) Click Next 
+        pyautogui.click(x=960, y=720)
+
+def wait_for_prompt():
+    '''
+    Inputs: None
+    Outputs: None
+
+    Looks for the text "What was the number?" on screen
+    if it sees it then it returns, otherwise it calls itself
     '''
 
-    image = ImageGrab.grab(bbox = (x1,y1,x2,y2))
-    return pytesseract.image_to_string(image)
+    image = ImageGrab.grab(bbox = (100,300,1621,751))
+    #image.show() # uncomment for testing purposes
+    #input() # uncomment with the above line to pause to close the screenshot
+    text = pytesseract.image_to_string(image)
+    if "What was the number?" not in text:
+        wait_for_prompt()
+    
+def get_number():
+    ''' 
+    Inputs: None
+    Outputs: Text to type -> String
+    
+    Takes a screenshot and returns the number displayed as a string
+    '''
+
+    image = ImageGrab.grab(bbox = (100,300,1621,751))
+    #image.show() # uncomment for testing purposes
+    # convert to string, config to only look for digits
+    return pytesseract.image_to_string(image, config='--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789')
