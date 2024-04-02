@@ -10,6 +10,7 @@ import pyautogui
 import reflexTest
 import sequenceTest
 import numberTest
+import typingTest
 
 activities = ['Reaction Time', 'Sequence Memory', 'Aim Trainer', 
               'Number Memory', 'Verbal Memory', 'Chimp Test',
@@ -131,3 +132,6 @@ if __name__ == "__main__":
     # Visual Memory
         
     # Typing Speed
+    if activity.lower() == 'typing speed':
+        print("Automating Typing Speed Test")
+        typingTest.start()
