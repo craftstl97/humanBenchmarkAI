@@ -91,7 +91,7 @@ def get_number(n):
     off = n*50
     if off > 750:
         off = 750
-    image = ImageGrab.grab(bbox = (800-off,360,1040+off,601))
+    image = ImageGrab.grab(bbox = (800-off,300,1040+off,601))
     image = image.convert('L') # Convert to grayscale
     image = image.point(lambda p: p > 200 and 255) # convert grayscale to binary for maximum accuracy
     # image.show() # uncomment for testing purposes
