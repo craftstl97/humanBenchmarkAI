@@ -21,7 +21,7 @@ def start():
 
     # The first target is free, right in the center
     print("Beginning Test")
-    pyautogui.click(x=920,y=330)
+    pyautogui.click(x=920,y=335)
 
     for x in range(30):
         x, y = findTarget()
@@ -38,8 +38,8 @@ def findTarget():
     Takes a screenshot, searches for the target within that screenshot, and returns its coordinates
     '''
 
-    x1 = 600
-    x2 = 1201
+    x1 = 580
+    x2 = 1251
     y1 = 160
     y2 = 531
     # Screenshot the game space
