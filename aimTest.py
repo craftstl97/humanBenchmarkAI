@@ -14,15 +14,15 @@ def start():
 
     The AI will have to identify the center of each target and click its coordinates as fast as possible.
     '''
-    print("Selecting Sequence Memory test")
-    pyautogui.click(x=960, y=400)
-    time.sleep(1)
 
-    # Click the start button
+    print("Selecting Sequence Memory test")
+    pyautogui.click(x=1260, y=400)
+    time.sleep(5)
+
+    # The first target is free, right in the center
     print("Beginning Test")
-    pyautogui.click(x=940,y=450)
-    
-    time.sleep(0.25)
+    pyautogui.click(x=920,y=330)
+
     for x in range(30):
         x, y = findTarget()
         pyautogui.leftClick()
@@ -38,21 +38,22 @@ def findTarget():
     Takes a screenshot, searches for the target within that screenshot, and returns its coordinates
     '''
 
+    x1 = 600
+    x2 = 1201
+    y1 = 160
+    y2 = 531
     # Screenshot the game space
-    image = ImageGrab.grab(bbox = (840,250,1041,451))
+    image = ImageGrab.grab(bbox = (x1,y1,x2,y2))
 
     # search screenshot for the target
     # searching left to right, bottom to top
-
-    for x in range(0,200,5):
-        for y in range(0,200,5):
-            pyautogui.moveTo(x+840, y+250)
+    for y in range(0,y2-y1,80):
+        for x in range(0,x2-x1,80):
+            pyautogui.moveTo(x+x1, y+y1)
             current_color = image.getpixel((x,y))
-            if current_color[1] >= 200:
-                return x+840, y+250
-
-    
-
-
+            print(current_color)
+            if current_color[1] >= 150:
+                print("Target Found!")
+                return x+x1, y+y1
 
     return findTarget()
