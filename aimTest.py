@@ -47,7 +47,7 @@ def findTarget():
     for x in range(0,200,5):
         for y in range(0,200,5):
             pyautogui.moveTo(x+840, y+250)
-            current_color = get_pixel_color(x,y)
+            current_color = image.getpixel((x,y))
             if current_color[1] >= 200:
                 return x+840, y+250
 
