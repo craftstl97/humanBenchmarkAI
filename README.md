@@ -39,3 +39,27 @@ however you may disable that limit should you please.
 
 **As an additional note:** The website will occasionally show ads which resize the screen by creating a banner on all edges, this immediately breaks the code
 I recommend running this with an Ad blocker enabled for best results.
+
+# Typing Speed
+
+The typing speed challenge deals with typing a block of text correctly as fast as possible. The text is different every time; however, the website pulls text from a variety of test text blocks so repeats are fairly common.
+
+From a coding perspective, this challenge deals with extracting text from images and re-entering it into the field provided. 
+
+This challenge proved slightly more difficult than anticipated. There is quite a lot of nuance to the text extraction engine that I hadn't realized. It needs fairly ideal conditions to not mistake certain special characters. An early issue I encountered was that the text recognition engine would mistake the box that the text appears in for a [ or | character.
+
+My solution for this was to simply strip any leading special characters, since none of the text options started with a special character. Another issue I encountered was that the text had to be entered character by character, which meant that I had to put a delay on the code so that it didn't enter the answer too fast for the website to catch up.
+
+Additionally, there was another issue with processing whitespace and carriage returns. This was fixed by replacing any whitespace characters with the standard single space, that way the code didn't interpret a newline character where there wasn't supposed to be one.
+
+# Number Memory
+
+The number memory challenge tasks the user with remembering a number that increases with each new level. The number starts at 1 character, and grows by 1 digit each time. 
+
+From a coding perspective this challenge is very similar to the typing speed challenge but with a few extra conditions. Firstly, the typing challenge gave users unlimited time to read through the text and only began when the first character was entered. This gave ample time to take a large screenshot and process it for text extraction. The second key difference is that instead of one long block of text, the challenge requires many small strings to be entered, and the area that is important grows as the challenge goes on. 
+
+Initially this challenge seemed like it was going to be the same as the last. It came with many issues, however. The text for this challenge is much larger, which counterintuitively led to the engine to frequently fail to recognize the text. It was capable of recognizing all the text except for the numbers. My best guess of why this is the cas was that the numbers were dramatically different sizes in comparison to the small concise text on screen. In order to combat this, I cropped out everything except for the numbers. The second assumption I made was that the screenshot was too wide, thus containing an abundance of irrelevant blue. After implementing both of those changes, the engine was able to identify numbers correctly. 
+
+As a result of trying to maintain the minimum screenshot size to contain all of the numbers, the bounding box had to grow with each iteration, which was not hard to implement. However, now that the code was working, it was still mistaking 5s and 9s, as well as 1s and 7s. This is only occasionally occurring, and the best score has been 15. The human average is 8 and scores fall off after 12 until plateauing at 19.
+
+I have tried several techniques to increase the accuracy of the engine including changing the color grading of the screenshot to maximize clarity, changing the size of the screenshot, and excluding all but numbers from the pool of possible options for the engine to recognize the shape as but thus far have not been able to achieve 100% recognition. I will move on for now and possibly revisit this challenge at a later date.
